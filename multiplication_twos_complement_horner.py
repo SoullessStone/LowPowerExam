@@ -1,9 +1,7 @@
-from full_number_binary import full_number_binary
 from invert_binary import invert_binary
 from left_cut_to_length import left_cut_to_length
 from left_shift import left_shift
-from left_trim import left_trim
-from pad_binary import pad_binary
+from sign_extend_to_32bit import sign_extend_to_length
 from sum_binary import sum_binary
 
 
@@ -11,6 +9,9 @@ from sum_binary import sum_binary
 # Efficient Multiplication and Division Using MSP430™ MCUs
 # Texas Instruments
 def multiplication_twos_complement_horner(x, m):
+    resultLength = len(x) + len(m)
+    x = sign_extend_to_length(x, resultLength)
+    m = sign_extend_to_length(m, resultLength)
     print(x)
     print(m)
     # X
@@ -40,13 +41,14 @@ def multiplication_twos_complement_horner(x, m):
                 print("next 1 found, distance: " + str(count))
                 print("before left_shift: " + str(result))
                 result = left_shift(result, count)
+                result = left_cut_to_length(result, resultLength)
                 print("after left_shift: " + str(result))
                 result = sum_binary(result, x)
-                result = left_trim(result)
 
                 if i == last1index:
                     result = left_shift(result, lastShift)
 
+                result = left_cut_to_length(result, resultLength)
                 count = 0
             else:
                 firstOneFound = True

@@ -1,12 +1,12 @@
 import numpy as np
 
-from sign_extend_to_32bit import sign_extend_to_32bit
+from sign_extend_to_32bit import sign_extend_to_length
 
 
 def multiplication_twos_complement(a_16bit, b_16bit):
     # sign extend a and b
-    a = sign_extend_to_32bit(a_16bit)
-    b = sign_extend_to_32bit(b_16bit)
+    a = sign_extend_to_length(a_16bit, 32)
+    b = sign_extend_to_length(b_16bit, 32)
 
     # partial products
     partialProducts = []
