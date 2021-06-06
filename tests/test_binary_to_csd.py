@@ -10,9 +10,21 @@ class test_binary_to_csd(unittest.TestCase):
         result = binary_to_csd([0, 1, 0, 1, 1, 1, 0, 1])
         self.assertEqual("[ 1  0 -1  0  0 -1  0  1]", str(result))
 
-    def test_b(self):
-        result = binary_to_csd([1, 0, 1, 0, 1, 1, 1])
+    def test_87(self):
+        result = binary_to_csd([0, 1, 0, 1, 0, 1, 1, 1])
         self.assertEqual("[ 1  0 -1  0 -1  0  0 -1]", str(result))
+
+    def test_minus41(self):
+        result = binary_to_csd([1, 0, 1, 0, 1, 1, 1])
+        self.assertEqual("[ 0. -1.  0. -1.  0.  0. -1.]", str(result))
+
+    def test_441(self):
+        result = binary_to_csd([0, 1, 1, 0, 1, 1, 1, 0, 0, 1])
+        self.assertEqual("[ 1  0  0 -1  0  0 -1  0  0  1]", str(result))
+
+    def test_minus441(self):
+        result = binary_to_csd([1, 0, 0, 1, 0, 0, 0, 1, 1, 1])
+        self.assertEqual("[-1.  0.  0.  1.  0.  0.  1.  0.  0. -1.]", str(result))
 
 
 if __name__ == '__main__':

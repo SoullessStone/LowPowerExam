@@ -1,6 +1,6 @@
 import numpy as np
 
-from sign_extend_to_32bit import sign_extend_to_length
+from sign_extend_to_length import sign_extend_to_length
 
 
 def multiplication_twos_complement(a_16bit, b_16bit):
