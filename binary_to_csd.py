@@ -1,5 +1,6 @@
 import numpy as np
 
+from counter import Counter
 from full_number_binary import full_number_binary
 from invert_binary import invert_binary
 from sum_binary import sum_binary
@@ -13,7 +14,7 @@ def binary_to_csd(x):
         # if it is negative, just calculate the csd for the positive number and then invert
         x = invert_binary(x)
         binRepresentation1, restOfX = full_number_binary(1, len(x) - 1)
-        x = sum_binary(x, binRepresentation1)
+        x = sum_binary(x, binRepresentation1, Counter())
         x = x[1:len(x)]
     # This allows us to find 1100000 (streak in the end
     # also it prevents endless loop due to i = len(x) -1

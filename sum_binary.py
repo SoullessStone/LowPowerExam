@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def sum_binary(x, y):
+def sum_binary(x, y, counter):
     if len(x) > len(y):
         a = x
         b = y
@@ -29,14 +29,20 @@ def sum_binary(x, y):
             result[ia + 1] = 1
         if localSum == 2:
             carry = 1
+            # COUNT - carry
+            counter.count()
             result[ia + 1] = 0
-            carryChangeCount = carryChangeCount + 2
         if localSum == 3:
             carry = 1
+            # COUNT - carry
+            counter.count()
             result[ia + 1] = 1
-            carryChangeCount = carryChangeCount + 3
-            bitChangeCount = bitChangeCount + result[ia + 1]
+
+        # COUNT - new sum, changed 1
+        counter.countOtherValue(result[ia + 1])
         ia = ia - 1
         ib = ib - 1
     result[0] = carry
+    # COUNT - also count last carry
+    counter.countOtherValue(carry)
     return result

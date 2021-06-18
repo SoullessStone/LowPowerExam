@@ -1,4 +1,5 @@
 from binary_to_csd import binary_to_csd
+from counter import Counter
 from invert_binary import invert_binary
 from left_cut_to_length import left_cut_to_length
 from left_shift import left_shift
@@ -25,7 +26,7 @@ def multiplication_csd_horner(x, m):
     if isNegativeM:
         # -X
         inverted_x = invert_binary(x)
-        result = sum_binary(inverted_x, [1])[1:len(x) + 1]
+        result = sum_binary(inverted_x, [1], Counter())[1:len(x) + 1]
 
     last1index = len(m) - 1
     while last1index > 0:
@@ -50,7 +51,7 @@ def multiplication_csd_horner(x, m):
                 result = left_cut_to_length(result, resultLength)
                 print("after left_shift: " + str(result))
                 if m[i] == 1:
-                    result = sum_binary(result, x)
+                    result = sum_binary(result, x, Counter())
                 else:
                     result = subtraction_binary(result, x)
 
