@@ -8,7 +8,9 @@ from pad_binary import pad_binary
 # Low Power 4*4 Canonical Signed Digit
 # Multiplier using 90nm Technology
 # Saloni1, Dr. Neelam Rup Prakash
-def multiplication_csd_2(a, b):
+def multiplication_csd_2(a_param, b_param):
+    a = a_param.copy()
+    b = b_param.copy()
     # left trim a+b, because we want to only have as many partial products as we need
     a = left_trim(a)
     b = left_trim(b)

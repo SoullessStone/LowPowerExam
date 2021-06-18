@@ -4,9 +4,11 @@ from sign_extend_to_length import sign_extend_to_length
 
 
 def multiplication_twos_complement(a_16bit, b_16bit, counter):
+    tempA = a_16bit.copy()
+    tempB = b_16bit.copy()
     # sign extend a and b
-    a = sign_extend_to_length(a_16bit, 32)
-    b = sign_extend_to_length(b_16bit, 32)
+    a = sign_extend_to_length(tempA, 32)
+    b = sign_extend_to_length(tempB, 32)
 
     # partial products
     partialProducts = []

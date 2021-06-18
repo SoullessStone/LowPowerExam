@@ -8,7 +8,9 @@ from sum_binary import sum_binary
 # based on Examples 6+7 from:
 # Efficient Multiplication and Division Using MSP430™ MCUs
 # Texas Instruments
-def multiplication_twos_complement_horner(x, m, counter):
+def multiplication_twos_complement_horner(x_param, m_param, counter):
+    x = x_param.copy()
+    m = m_param.copy()
     resultLength = len(x) + len(m)
     x = sign_extend_to_length(x, resultLength)
     m = sign_extend_to_length(m, resultLength)
