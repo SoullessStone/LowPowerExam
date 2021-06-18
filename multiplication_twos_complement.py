@@ -3,7 +3,7 @@ import numpy as np
 from sign_extend_to_length import sign_extend_to_length
 
 
-def multiplication_twos_complement(a_16bit, b_16bit):
+def multiplication_twos_complement(a_16bit, b_16bit, counter):
     # sign extend a and b
     a = sign_extend_to_length(a_16bit, 32)
     b = sign_extend_to_length(b_16bit, 32)
@@ -28,6 +28,10 @@ def multiplication_twos_complement(a_16bit, b_16bit):
         partialProducts.append(partialProduct)
         i = i + 1
 
+    # COUNT - All changes for the PP
+    oneCounterPP = sum(map(sum, partialProducts))
+    counter.countOtherValue(oneCounterPP)
+
     # Summing up the partial products
     result = np.zeros(32)
     i = 0
@@ -45,10 +49,18 @@ def multiplication_twos_complement(a_16bit, b_16bit):
                 result[j] = 1
             if localSum == 2:
                 carry = 1
+                # COUNT - carry
+                counter.count()
                 result[j] = 0
             if localSum == 3:
                 carry = 1
+                # COUNT - carry
+                counter.count()
                 result[j] = 1
+
+            # COUNT - new sum, changed 1
+            counter.countOtherValue(result[j])
+
             j = j - 1
         i = i + 1
     return result
