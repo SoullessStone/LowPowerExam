@@ -8,7 +8,7 @@ from pad_binary import pad_binary
 # Low Power 4*4 Canonical Signed Digit
 # Multiplier using 90nm Technology
 # Saloni1, Dr. Neelam Rup Prakash
-def multiplication_csd_2(a_param, b_param):
+def multiplication_csd_2(a_param, b_param, counter):
     a = a_param.copy()
     b = b_param.copy()
     # left trim a+b, because we want to only have as many partial products as we need
@@ -26,7 +26,11 @@ def multiplication_csd_2(a_param, b_param):
         ppi = 0
         partialProduct = []
         while ppi < len(a):
-            partialProduct.append(curB * a[ppi])
+            curBTimeA = curB * a[ppi]
+            partialProduct.append(curBTimeA)
+            if curBTimeA == -1 or curBTimeA == 1:
+                counter.count()
+                # count all changing 1s
             ppi += 1
 
         # shift x times
@@ -54,21 +58,37 @@ def multiplication_csd_2(a_param, b_param):
             if localSum == 1:
                 carry = 0
                 result[j] = 1
+                # COUNT - result change
+                counter.count()
             if localSum == 2:
                 carry = 1
+                # COUNT - carry
+                counter.count()
                 result[j] = 0
             if localSum == 3:
                 carry = 1
+                # COUNT - carry
+                counter.count()
                 result[j] = 1
+                # COUNT - result change
+                counter.count()
             if localSum == -1:
                 carry = 0
                 result[j] = -1
+                # COUNT - result change
+                counter.count()
             if localSum == -2:
                 carry = -1
+                # COUNT - carry
+                counter.count()
                 result[j] = 0
             if localSum == -3:
                 carry = -1
+                # COUNT - carry
+                counter.count()
                 result[j] = -1
+                # COUNT - result change
+                counter.count()
             j = j - 1
         i = i + 1
     return result

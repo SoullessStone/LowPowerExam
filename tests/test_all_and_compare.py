@@ -1,6 +1,8 @@
 import unittest
 
+from binary_to_csd import binary_to_csd
 from counter import Counter
+from multiplication_csd_2 import multiplication_csd_2
 from multiplication_csd_horner import multiplication_csd_horner
 from multiplication_twos_complement import multiplication_twos_complement
 from multiplication_twos_complement_horner import multiplication_twos_complement_horner
@@ -25,6 +27,8 @@ class test_all_and_compare(unittest.TestCase):
 
         i = 0
         while i < len(x_array):
+            currX = x_array[i].copy()
+            currM = m_array[i].copy()
             # initialize all counters
             counterTwosComplement = Counter()
             counterCsd = Counter()
@@ -32,35 +36,40 @@ class test_all_and_compare(unittest.TestCase):
             counterCsdHorner = Counter()
 
             # 2 complement
-            resultTwosComplement = multiplication_twos_complement(x_array[i], m_array[i], counterTwosComplement)
+            resultTwosComplement = multiplication_twos_complement(currX, currM, counterTwosComplement)
             resultsTwosComplement.append(resultTwosComplement)
             countsTwosComplement.append(counterTwosComplement.countValue)
 
             # 2 complement horner
-            resultTwosComplementHorner = multiplication_twos_complement_horner(x_array[i], m_array[i],
+            resultTwosComplementHorner = multiplication_twos_complement_horner(currX, currM,
                                                                                counterTwosComplementHorner)
             resultsTwosComplementHorner.append(resultTwosComplementHorner)
             countsTwosComplementHorner.append(counterTwosComplementHorner.countValue)
 
             # csd
+            x = binary_to_csd(currX.copy(), counterCsd)
+            m = binary_to_csd(currM.copy(), counterCsd)
+            resultCsd = multiplication_csd_2(x, m, counterCsd)
 
             # csd horner
-            resultCsdHorner = multiplication_csd_horner(x_array[i], m_array[i], counterCsdHorner)
+            resultCsdHorner = multiplication_csd_horner(currX, currM, counterCsdHorner)
             resultsCsdHorner.append(resultCsdHorner)
             countsCsdHorner.append(counterCsdHorner.countValue)
 
-            print("counterTwosComplement count, result")
+            print("TwosComplement count, result")
             print(counterTwosComplement.countValue)
             print(resultTwosComplement)
-            print("counterTwosComplementHorner count, result")
+            print("TwosComplementHorner count, result")
             print(counterTwosComplementHorner.countValue)
             print(resultTwosComplementHorner)
-            print("counterCsdHorner count, result")
+            print("Csd count, result")
+            print(counterCsd.countValue)
+            print(resultCsd)
+            print("CsdHorner count, result")
             print(counterCsdHorner.countValue)
             print(resultCsdHorner)
 
             i += 1
 
-
-if __name__ == '__main__':
-    unittest.main()
+            if __name__ == '__main__':
+                unittest.main()
