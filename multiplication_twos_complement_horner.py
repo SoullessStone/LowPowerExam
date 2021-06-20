@@ -32,8 +32,8 @@ def multiplication_twos_complement_horner(x_param, m_param, counter):
             break
         last1index -= 1
     lastShift = len(m) - last1index - 1
-    print('lastShift')
-    print(lastShift)
+    # print('lastShift')
+    # print(lastShift)
 
     i = 0
     count = 0

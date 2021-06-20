@@ -33,11 +33,13 @@ def binary_to_csd(x, counter):
                     while j <= i + streakCount:
                         if j == i:
                             x[j] = 1
-                            # SUM - count 1
+                            # SUM - counts as two bits because of csd encoding
+                            counter.count()
                             counter.count()
                         elif j == i + streakCount:
                             x[j] = -1
-                            # SUM - count -1 as 1
+                            # SUM - counts as two bits because of csd encoding
+                            counter.count()
                             counter.count()
                         else:
                             x[j] = 0

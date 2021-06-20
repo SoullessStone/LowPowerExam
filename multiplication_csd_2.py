@@ -28,9 +28,13 @@ def multiplication_csd_2(a_param, b_param, counter):
         while ppi < len(a):
             curBTimeA = curB * a[ppi]
             partialProduct.append(curBTimeA)
-            if curBTimeA == -1 or curBTimeA == 1:
+            if curBTimeA == -1:
                 counter.count()
-                # count all changing 1s
+                counter.count()
+                # count all changing 1s. -1 == 11 in csd
+            if curBTimeA == 1:
+                counter.count()
+                # count all changing 1s. 1 == 01 in csd
             ppi += 1
 
         # shift x times
@@ -58,36 +62,40 @@ def multiplication_csd_2(a_param, b_param, counter):
             if localSum == 1:
                 carry = 0
                 result[j] = 1
-                # COUNT - result change
+                # SUM - 1 = 01, counts as 1
                 counter.count()
             if localSum == 2:
                 carry = 1
-                # COUNT - carry
+                # COUNT - carry 1 = 01, counts as 1
                 counter.count()
                 result[j] = 0
             if localSum == 3:
                 carry = 1
-                # COUNT - carry
+                # COUNT - carry 1 = 01, counts as 1
                 counter.count()
                 result[j] = 1
-                # COUNT - result change
+                # SUM - 1 = 01, counts as 1
                 counter.count()
             if localSum == -1:
                 carry = 0
                 result[j] = -1
-                # COUNT - result change
+                # SUM - -1 = 11, counts as 2
+                counter.count()
                 counter.count()
             if localSum == -2:
                 carry = -1
-                # COUNT - carry
+                # COUNT - carry -1 = 11, counts as 2
+                counter.count()
                 counter.count()
                 result[j] = 0
             if localSum == -3:
                 carry = -1
-                # COUNT - carry
+                # COUNT - carry -1 = 11, counts as 2
+                counter.count()
                 counter.count()
                 result[j] = -1
-                # COUNT - result change
+                # SUM - -1 = 11, counts as 2
+                counter.count()
                 counter.count()
             j = j - 1
         i = i + 1
